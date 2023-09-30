@@ -13,7 +13,6 @@ export default function Navbar({ }: Props) {
                     <span className="font-bold">PriceWise</span>
                 </Link>
                 <ThemeToggle />
-
             </div>
         </div>
     )
