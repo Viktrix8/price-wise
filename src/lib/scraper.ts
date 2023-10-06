@@ -4,10 +4,20 @@ import { ScrappedProduct } from "@/types/product";
 import axios from "axios"
 import * as cheerio from "cheerio"
 
-function convertPriceStringToNumber(priceStr: string): number {
+const convertPriceStringToNumber = (priceStr: string): number => {
     const cleanedStr = priceStr.replace(/[^0-9\.]/g, '');  // Remove everything except numbers and decimal point
     const floatVal = parseFloat(cleanedStr);  // Convert the cleaned string to a float
     return Math.floor(floatVal);  // Convert the float to an integer
+}
+
+export const validateAmazonUrl = (urlString: string) => {
+    try {
+        const url = new URL(urlString);
+        const amazonRegex = /^www\.amazon\.com$/;
+        return amazonRegex.test(url.hostname);
+    } catch (error) {
+        return false;  // If the URL is invalid, return false.
+    }
 }
 
 const extractUsingSelectors = (html: string, selectors: string[]): string | null => {

@@ -20,10 +20,10 @@
     "clsx": "^2.0.0",
     "lucide-react": "^0.279.0",
     "mongodb": "^6.1.0",
-    "next": "latest",
+    "next": "canary",
     "next-themes": "^0.2.1",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "experimental",
+    "react-dom": "experimental",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7"
   },
