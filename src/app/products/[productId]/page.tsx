@@ -1,8 +1,8 @@
-import { Button, buttonVariants } from "@/components/ui/button"
+import SubscribeButton from "@/components/subscribe-button"
+import { Button } from "@/components/ui/button"
 import { prisma } from "@/lib/db"
 import { price } from "@/lib/utils"
 import { AreaChart, ArrowBigDown, ArrowBigUp, MessageSquare, Star, Tag } from "lucide-react"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 
 type Props = {
@@ -46,7 +46,7 @@ export default async function page({ params: { productId } }: Props) {
                                 </Button>
                             </div>
                         </div>
-                        {product.originalPrice && <p className="line-through text-muted-foreground text-xl mt-4">{price(product.originalPrice)}</p>}
+                        {product.originalPrice !== 0 && product.originalPrice && <p className="line-through text-muted-foreground text-xl mt-4">{price(product.originalPrice)}</p>}
                         <p className="mt-4 text-muted-foreground">{product.stockStatus}</p>
                     </div>
                     <hr className="my-6" />
@@ -56,7 +56,7 @@ export default async function page({ params: { productId } }: Props) {
                                 <span className="text-muted-foreground">Data From</span>
                                 <div className="flex gap-2 items-center">
                                     <AreaChart />
-                                    <span className="font-bold text-2xl">{new Date(product.createdAt).toDateString()}</span>
+                                    <span className="font-bold text-2xl">{new Date(product.updatedAt).toDateString()}</span>
                                 </div>
                             </div>
                             <div className="border flex flex-col gap-2 p-4">
@@ -81,7 +81,7 @@ export default async function page({ params: { productId } }: Props) {
                                 </div>
                             </div>
                         </div>
-                        <Button className="mt-4 rounded-full">Track</Button>
+                        <SubscribeButton productId={product.id} />
                     </div>
                 </div>
             </div>

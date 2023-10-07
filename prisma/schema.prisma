@@ -11,18 +11,33 @@ datasource db {
 }
 
 model Product {
-    id           Int      @id @default(autoincrement())
-    title        String
-    description  String?
-    price        Int
-    stockStatus  String
-    isInSale     Boolean
-    originalPrice Int?
-    url          String
-    highestPrice Int
-    lowestPrice  Int
-    createdAt    DateTime @default(now())
-    productImageUrl String
-    rating      Float
-    ratingCount Int
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String?
+  price           Int
+  stockStatus     String
+  isInSale        Boolean
+  originalPrice   Int?
+  url             String
+  highestPrice    Int
+  lowestPrice     Int
+  createdAt       DateTime @default(now())
+  productImageUrl String
+  rating          Float
+  ratingCount     Int
+
+  updatedAt    DateTime       @updatedAt
+  Subscription Subscription[]
+}
+
+model Subscription {
+  email String @unique
+
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([email, productId])
 }

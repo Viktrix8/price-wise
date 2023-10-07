@@ -5,6 +5,7 @@ import axios from "axios"
 import * as cheerio from "cheerio"
 
 const convertPriceStringToNumber = (priceStr: string): number => {
+    if (!priceStr) return 0
     const cleanedStr = priceStr.replace(/[^0-9\.]/g, '');  // Remove everything except numbers and decimal point
     const floatVal = parseFloat(cleanedStr);  // Convert the cleaned string to a float
     return Math.floor(floatVal);  // Convert the float to an integer
