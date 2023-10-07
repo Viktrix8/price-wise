@@ -77,7 +77,7 @@ export default function SubscribeButton({ productId }: Props) {
                 <AlertDialogHeader>
                     <AlertDialogTitle>Do you want to subscribe to this product?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        <p>We'll send you an email when the price drops. You can unsubscribe at any time.</p>
+                        <p>We&apos;ll send you an email when the price drops. You can unsubscribe at any time.</p>
                         <Input placeholder='myemail@domain.com' value={email} onChange={(e) => setEmail(e.target.value)} className='my-2' type="email" />
                     </AlertDialogDescription>
                 </AlertDialogHeader>

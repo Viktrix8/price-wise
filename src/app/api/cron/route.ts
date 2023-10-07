@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db"
 import { scrapeProduct } from "@/lib/scraper"
 import { Product } from "@prisma/client"
 import { createTransport } from "nodemailer"
+import returnHtml from "@/lib/html"
 
 export const POST = async (req: NextRequest) => {
     try {
@@ -66,7 +67,7 @@ export const POST = async (req: NextRequest) => {
                 }
             })
 
-            if (subscribers.length) {
+            if (Object.keys(newProduct).length > 0 && subscribers.length) {
                 await Promise.all(subscribers.map(async subscriber => {
                     const transporter = createTransport({
                         service: "gmail",
@@ -81,11 +82,7 @@ export const POST = async (req: NextRequest) => {
                         from: "najetak.viktrixeu@gmail.com",
                         to: subscriber.email,
                         subject: "Product price change",
-                        html: `
-                            <h1>Product price change</h1>
-                            <p>Product: ${product.title}</p>
-                            <a href="${`${process.env.PUBLIC_URL}/products/${product.id}`}">Product link</a>
-                        `
+                        html: returnHtml(product.title, `${process.env.PUBLIC_URL}/products/${product.id}`)
                     })
                 }))
             }
