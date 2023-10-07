@@ -15,6 +15,7 @@ export const POST = async (req: NextRequest) => {
         const products = await prisma.product.findMany()
         await Promise.all(products.map(async product => {
             // Scrape product and compare the product price with the current price as well as the stock status, if there is a change, update the product and log out the email subscribers
+
             const scrapedProduct = await scrapeProduct(product.url)
 
             if (!scrapedProduct) return
