@@ -1,6 +1,6 @@
 {
     "functions": {
-        "src/app/api/cron/route.ts": {
+        "api/cron/route.ts": {
             "maxDuration": 60
         }
     }
